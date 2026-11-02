@@ -1,10 +1,11 @@
+import os
 import requests
 from django.shortcuts import render, redirect
 from .models import City
 from .forms import CityForm
 
 def weather(request):
-    url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=***REMOVED***'
+    url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=' + os.environ["OPENWEATHER_API_KEY"]
 
     err_msg = ''
     message = ''

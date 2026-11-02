@@ -11,7 +11,7 @@ python manage.py migrate
 python manage.py runserver      # http://localhost:8000
 ```
 
-Get a free API key from [openweathermap.org](https://home.openweathermap.org/api_keys) and put it in the request URL in `weather/views.py`.
+Get a free API key from [openweathermap.org](https://home.openweathermap.org/api_keys) and export it as `OPENWEATHER_API_KEY` (see [Configuration](#configuration)).
 
 ## Routes
 
@@ -23,3 +23,14 @@ Get a free API key from [openweathermap.org](https://home.openweathermap.org/api
 ## Tech
 
 Python · Django · requests · OpenWeatherMap API · Bulma CSS
+
+## Configuration
+
+Secrets are read from **environment variables**, so nothing sensitive lives in the code. Copy [`.env.example`](.env.example) to `.env` (it is git-ignored) or export the variables in your shell:
+
+| Variable | Purpose |
+|---|---|
+| `DJANGO_SECRET_KEY` | Django `SECRET_KEY`. If unset, a random key is generated at startup (fine for local dev). |
+| `OPENWEATHER_API_KEY` | OpenWeatherMap API key |
+
+The same values are stored as **GitHub Actions secrets** on this repo (*Settings → Secrets and variables → Actions*), so CI/CD workflows can use them as `${{ secrets.NAME }}`.
